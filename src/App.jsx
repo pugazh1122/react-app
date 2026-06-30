@@ -10,11 +10,14 @@ import Usecontextlearning from "./Pages/Hookslearning/Usecontextlearning";
 import Apilearning from "./Pages/Apilearning/Apilearning";
 import Router from "./Pages/Router/Router";
 
+/* ================= NAVBAR ================= */
+
 function Navbar() {
   const navigate = useNavigate();
   const [showHooks, setShowHooks] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -26,85 +29,108 @@ function Navbar() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const navButton =
+    "w-full sm:w-auto text-base sm:text-lg md:text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 transition";
+
+  const dropdownButton =
+    "px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 w-full text-left";
+
   return (
-    <div className="flex flex-col sm:flex-row flex justify-center gap-3 p-4 bg-gray-300">
-      <button
-        onClick={() => navigate("/Home")}
-        className="text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 cursor-pointer"
-      >
-        Home
-      </button>
+    <div className="bg-gray-300 p-4">
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3">
 
-      <button
-        onClick={() => navigate("/Propslearning")}
-        className="text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 cursor-pointer"
-      >
-        Props
-      </button>
-
-      <div className="relative" ref={dropdownRef}>
-        <button
-          onClick={() => setShowHooks(!showHooks)}
-          className="text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 cursor-pointer"
-        >
-          Hooks
+        {/* Home */}
+        <button onClick={() => navigate("/Home")} className={navButton}>
+          Home
         </button>
 
-        {showHooks && (
-          <div className="absolute left-0 right-0 sm:right-auto mt-2 flex flex-col gap-2 bg-white p-2 rounded-lg shadow-lg z-50 min-w-[180px]">
-            <button
-              onClick={() => navigate("/Usestatelearning")}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-            >
-              useState
-            </button>
+        {/* Props */}
+        <button
+          onClick={() => navigate("/Propslearning")}
+          className={navButton}
+        >
+          Props
+        </button>
 
-            <button
-              onClick={() => navigate("/Useeffectlearning")}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-            >
-              useEffect
-            </button>
+        {/* Hooks Dropdown */}
+        <div className="relative w-full sm:w-auto" ref={dropdownRef}>
+          <button
+            onClick={() => setShowHooks(!showHooks)}
+            className={navButton}
+          >
+            Hooks
+          </button>
 
-            <button
-              onClick={() => navigate("/Usenavigatelearning")}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-            >
-              useNavigate
-            </button>
+          {showHooks && (
+            <div className="absolute left-0 sm:left-0 mt-2 w-full sm:min-w-[180px] bg-white rounded-lg shadow-lg z-50 p-2 flex flex-col gap-2">
 
-            <button
-              onClick={() => navigate("/Usecontextlearning")}
-              className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
-            >
-              useContext
-            </button>
-          </div>
-        )}
+              <button
+                onClick={() => {
+                  navigate("/Usestatelearning");
+                  setShowHooks(false);
+                }}
+                className={dropdownButton}
+              >
+                useState
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/Useeffectlearning");
+                  setShowHooks(false);
+                }}
+                className={dropdownButton}
+              >
+                useEffect
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/Usenavigatelearning");
+                  setShowHooks(false);
+                }}
+                className={dropdownButton}
+              >
+                useNavigate
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/Usecontextlearning");
+                  setShowHooks(false);
+                }}
+                className={dropdownButton}
+              >
+                useContext
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* API */}
+        <button
+          onClick={() => navigate("/Apilearning")}
+          className={navButton}
+        >
+          API
+        </button>
+
+        {/* Router */}
+        <button
+          onClick={() => navigate("/Router")}
+          className={navButton}
+        >
+          Router
+        </button>
       </div>
-
-      <button
-        onClick={() => navigate("/Apilearning")}
-        className="text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 cursor-pointer"
-      >
-        API
-      </button>
-
-      <button
-        onClick={() => navigate("/Router")}
-        className="text-xl text-white bg-blue-500 rounded-lg px-4 py-2 hover:bg-blue-800 cursor-pointer"
-      >
-        Router
-      </button>
     </div>
   );
 }
+
+/* ================= APP ================= */
 
 const App = () => {
   return (
@@ -118,14 +144,8 @@ const App = () => {
         <Route path="/Propslearning" element={<Propslearning />} />
         <Route path="/Usestatelearning" element={<Usestatelearning />} />
         <Route path="/Useeffectlearning" element={<Useeffectlearnig />} />
-        <Route
-          path="/Usenavigatelearning"
-          element={<Usenavigatelearning />}
-        />
-        <Route
-          path="/Usecontextlearning"
-          element={<Usecontextlearning />}
-        />
+        <Route path="/Usenavigatelearning" element={<Usenavigatelearning />} />
+        <Route path="/Usecontextlearning" element={<Usecontextlearning />} />
         <Route path="/Apilearning" element={<Apilearning />} />
         <Route path="/Router" element={<Router />} />
       </Routes>

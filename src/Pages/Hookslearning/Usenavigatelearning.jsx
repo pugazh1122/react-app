@@ -22,6 +22,7 @@ function Home() {
   return (
     <div>
       <h1>Home Page</h1>
+
       <button onClick={goToAbout}>
         Go to About Page
       </button>
@@ -33,26 +34,38 @@ export default Home;
 `;
 
   return (
-    <div className="bg-gray-300 h-screen p-4 rounded-lg">
-      <h1 className="text-4xl text-blue-400">useNavigate</h1>
+    <div className="bg-gray-300 min-h-screen p-4 sm:p-6 md:p-8 rounded-lg">
+      {/* Heading */}
+      <h1 className="text-3xl sm:text-4xl md:text-5xl text-blue-500 font-bold">
+        useNavigate
+      </h1>
 
-      <p className="text-2xl mt-4">
+      {/* Introduction */}
+      <p className="text-lg sm:text-xl md:text-2xl mt-4 leading-relaxed">
         useNavigate is a React Router Hook used to move from one page to
         another page programmatically.
       </p>
 
-      <h2 className="text-3xl mt-6 text-green-600">
+      {/* Interview Definition */}
+      <h2 className="text-2xl sm:text-3xl text-green-600 font-semibold mt-8">
         Interview Definition
       </h2>
-      <pre className="bg-white p-4 rounded-lg mt-2">
-        <code>{definition}</code>
+
+      <pre className="bg-white p-4 rounded-lg mt-3 overflow-x-auto">
+        <code className="text-sm sm:text-base whitespace-pre">
+          {definition}
+        </code>
       </pre>
 
-      <h2 className="text-3xl mt-6 text-green-600">
+      {/* Example */}
+      <h2 className="text-2xl sm:text-3xl text-green-600 font-semibold mt-8">
         Simple Example
       </h2>
-      <pre className="bg-white p-4 rounded-lg mt-2">
-        <code>{exampleCode}</code>
+
+      <pre className="bg-white p-4 rounded-lg mt-3 overflow-x-auto">
+        <code className="text-xs sm:text-sm md:text-base whitespace-pre">
+          {exampleCode}
+        </code>
       </pre>
     </div>
   );
